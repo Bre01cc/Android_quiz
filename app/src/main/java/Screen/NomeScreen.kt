@@ -25,24 +25,22 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import componente.LogoApp
 
 @Composable
-fun NameUser(modifier: Modifier = Modifier) {
+fun NomeScreen(navController: NavController) {
     var nome by remember  {
         mutableStateOf("")
     }
     Column(
-        modifier = modifier.fillMaxSize()
+        modifier = Modifier.fillMaxSize()
             .background(Color(82, 32, 93, 255)),
         horizontalAlignment = CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(15.dp)
 
     ) {
-        Image(
-            painter = painterResource(com.aphamogged.quiz.R.drawable.pergunta),
-            contentDescription = "IMC_Icon",
-            modifier = Modifier.size(60.dp)
-        )
+        LogoApp(tamanho = 60)
         Row(
             modifier = Modifier.fillMaxWidth()
                 .padding(vertical = 16.dp),
@@ -77,6 +75,10 @@ fun NameUser(modifier: Modifier = Modifier) {
                 Button(
                     modifier = Modifier.fillMaxWidth(),
                     onClick = {
+                        nome.trim()
+                        if(nome != null && nome != ""){
+                            navController.navigate("questionario/nome = ${nome}")
+                        }
                     }
                 ) {
                     Text(
@@ -86,6 +88,7 @@ fun NameUser(modifier: Modifier = Modifier) {
                 Button(
                     modifier = Modifier.fillMaxWidth(),
                     onClick = {
+                        navController.popBackStack()
                     }
                 ) {
                     Text(

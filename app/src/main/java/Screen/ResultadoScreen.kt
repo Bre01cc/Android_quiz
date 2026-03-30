@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -17,52 +18,54 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.aphamogged.quiz.R
+import androidx.navigation.NavController
+import componente.LogoApp
 
 @Composable
-fun Apresentacao(modifier: Modifier = Modifier) {
+fun ResultadoScreen(navController: NavController) {
+    val acertos = 0
     Column(
         modifier = Modifier.fillMaxSize()
             .background(Color(82, 32, 93, 255)),
-        Arrangement.Center,
-        Alignment.CenterHorizontally
-    ) {
+        verticalArrangement = Arrangement.Center
 
+    ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(50.dp)
+            verticalArrangement = Arrangement.spacedBy(20.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Image(
-                painter = painterResource(R.drawable.pergunta),
-                contentDescription = "IMC_Icon",
-                modifier = Modifier.size(160.dp)
-                    .padding(16.dp)
-            )
+            LogoApp(tamanho = 160)
             Column(
-                modifier = Modifier.fillMaxWidth()
-                    .padding(horizontal = 95.dp),
+                modifier = Modifier.fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(40.dp)
+                verticalArrangement = Arrangement.spacedBy(10.dp)
             ) {
                 Text(
-                    text = "QUIZATRON 3000",
+                    text = "Bom trabalho!",
                     fontSize = 24.sp,
                     color = Color.White
                 )
+                Text(
+                    text = "Você acertou ${acertos} de 3 perguntas",
+                    fontSize = 16.sp,
+                    color = Color.White
+                )
+            }
+            Row() {
                 Button(
-                    modifier= Modifier
-                        .fillMaxWidth(),
                     onClick = {
 
                     }
-
                 ) {
-                    Text("COMENÇAR!")
+                    Text(
+                        text = "JOGAR NOVAMENTE",
+                        fontSize = 24.sp
+                    )
                 }
             }
-
         }
 
     }
+
 }
