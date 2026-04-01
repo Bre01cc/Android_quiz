@@ -22,7 +22,7 @@ exibe a quantidade de acertos com base nas alternativas selecionadas pelo usuár
 ```
 https://github.com/Bre01cc/Android_quiz.git
 ```
-## Aplicação
+## Demonstração
  - [Vídeo](https://youtube.com/shorts/WtdeQtK3by4?si=uHiFFJcfZyrMgvf9)
 
 
