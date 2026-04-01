@@ -25,10 +25,11 @@ fun QuestaoButton(
     modifier: Modifier = Modifier,
     alternativa: String,
     viewModel: QuizViewModel,
+    reset : Boolean,
+    corButton : Color,
     alternativaCorreta: Int,
-    indexDaAlternativa:Int
+    selecionadaAlternativa: Int
 ) {
-
 
     Button(
         modifier = Modifier.fillMaxWidth()
@@ -38,11 +39,11 @@ fun QuestaoButton(
                 shape = RoundedCornerShape(10.dp)
             ),
             colors = ButtonDefaults.buttonColors(
-            Color.White),
+            corButton),
              onClick = {
-
+                    viewModel.resetAlterar()
                  if (viewModel.statusDaQuestao != false){
-                     var resposta = viewModel.validarQuestao(alternativaCorreta,indexDaAlternativa)
+                     var resposta = viewModel.validarQuestao(alternativaCorreta,selecionadaAlternativa)
                      if (resposta){
                          viewModel.aumentarAcerto()
                      }

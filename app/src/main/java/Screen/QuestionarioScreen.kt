@@ -99,6 +99,7 @@ fun QuestionarioScreen(
                      avancar  = viewModel.proximaQuestao()
                         viewModel.desativaAvancar()
                         viewModel.ativarQuestao()
+                        viewModel.resetPadrao()
                        if (avancar == false){
                            navController.navigate("resultado/${nome}/${acerto}")
                        }

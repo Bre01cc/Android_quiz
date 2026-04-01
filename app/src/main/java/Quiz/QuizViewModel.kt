@@ -16,6 +16,10 @@ class QuizViewModel: ViewModel(){
 
     private var _statusDoButton by mutableStateOf(false)
 
+    private var _reset by mutableStateOf(true)
+
+    val reset get() = _reset
+
     val statusDoButton get() = _statusDoButton
 
     private var _statusDaQuestao by mutableStateOf(true)
@@ -82,6 +86,13 @@ class QuizViewModel: ViewModel(){
 
     fun aumentarAcerto (){
         _acerto++
+    }
+    fun resetAlterar (){
+        _reset = false
+    }
+
+    fun resetPadrao(){
+        _reset = true
     }
 
 

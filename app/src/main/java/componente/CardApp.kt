@@ -2,7 +2,6 @@ package componente
 
 import Quiz.QuizViewModel
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,6 +16,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
+
 @Composable
 fun CardApp(
     modifier: Modifier = Modifier,
@@ -25,6 +25,9 @@ fun CardApp(
     alternativaCorreta : Int,
     viewModel: QuizViewModel) {
     //Componente
+    var indexAtual  = 0
+    var color = Color.White
+    val reset = viewModel.reset
     Card(
         modifier = Modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(
@@ -32,7 +35,7 @@ fun CardApp(
         ),
         border = BorderStroke(2.dp, Color.Black),
     ) {
-        var indexAtual = 0
+
         Column(
             modifier = Modifier.fillMaxWidth()
                 .padding(horizontal = 15.dp, vertical = 20.dp),
@@ -41,7 +44,8 @@ fun CardApp(
         ) {
             Text(
                 text = "$questao",
-                fontSize = 24.sp
+                fontSize = 24.sp,
+                color = Color.White
             )
             //Componente
             Column(
@@ -49,14 +53,40 @@ fun CardApp(
                 verticalArrangement = Arrangement.spacedBy(10.dp)
             ) {
               alternativas.forEach {
-                  QuestaoButton(
-                      modifier = Modifier,
-                      alternativa = it,
-                      viewModel = viewModel,
-                      alternativaCorreta = alternativaCorreta,
-                      indexDaAlternativa = indexAtual
-                  )
+                  if(reset){
+                      QuestaoButton(
+                          modifier = Modifier,
+                          alternativa = it,
+                          viewModel = viewModel,
+                          alternativaCorreta = alternativaCorreta,
+                          selecionadaAlternativa = indexAtual,
+                          reset = reset,
+                          corButton = color)
+                  }
+                 else if (indexAtual != alternativaCorreta){
+                      QuestaoButton(
+                          modifier = Modifier,
+                          alternativa = it,
+                          viewModel = viewModel,
+                          alternativaCorreta = alternativaCorreta,
+                          selecionadaAlternativa = indexAtual,
+                          reset = reset,
+                          corButton = Color.Red
+                      )
+                  }else if (indexAtual == alternativaCorreta){
+                      QuestaoButton(
+                          modifier = Modifier,
+                          alternativa = it,
+                          viewModel = viewModel,
+                          alternativaCorreta = alternativaCorreta,
+                          selecionadaAlternativa = indexAtual,
+                          reset = reset,
+                          corButton = Color.Green
+                      )
+                  }
+
                   indexAtual++
+
               }
             }
 
