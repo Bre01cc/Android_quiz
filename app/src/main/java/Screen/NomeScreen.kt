@@ -37,67 +37,75 @@ fun NomeScreen(navController: NavController) {
         modifier = Modifier.fillMaxSize()
             .background(Color(82, 32, 93, 255)),
         horizontalAlignment = CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(15.dp)
-
+        verticalArrangement = Arrangement.Center
     ) {
-        LogoApp(tamanho = 60)
-        Row(
-            modifier = Modifier.fillMaxWidth()
-                .padding(vertical = 16.dp),
-            horizontalArrangement = Arrangement.Center
-        ) {
-            Text(
-                text = "Qual seu nome?",
-                fontSize = 24.sp,
-                color = Color.White
-            )
-
-        }
         Column(
             modifier = Modifier.fillMaxWidth(),
-            Arrangement.spacedBy(25.dp),
-            Alignment.CenterHorizontally
+            horizontalAlignment = CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(15.dp)
+
         ) {
-            OutlinedTextField(
-                value = nome,
-                onValueChange = {
-                    nome = it
-                },
-                colors = OutlinedTextFieldDefaults.colors(
-                    Color.White
-                )
-            )
-            Column(
+            LogoApp(tamanho = 80)
+            Row(
                 modifier = Modifier.fillMaxWidth()
-                    .padding(horizontal = 110.dp),
-                Arrangement.spacedBy(10.dp)
+                    .padding(vertical = 16.dp),
+                horizontalArrangement = Arrangement.Center
             ) {
-                Button(
-                    modifier = Modifier.fillMaxWidth(),
-                    onClick = {
-                        nome.trim()
-                        if(nome != null && nome != ""){
-                            navController.navigate("questionario/nome = ${nome}")
+                Text(
+                    text = "Qual seu nome?",
+                    fontSize = 24.sp,
+                    color = Color.White
+                )
+
+            }
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                Arrangement.spacedBy(25.dp),
+                Alignment.CenterHorizontally
+            ) {
+                OutlinedTextField(
+                    value = nome,
+                    onValueChange = {
+                        nome = it
+                    },
+                    colors = OutlinedTextFieldDefaults.colors(
+                        Color.White
+                    )
+                )
+                Column(
+                    modifier = Modifier.fillMaxWidth()
+                        .padding(horizontal = 110.dp),
+                    Arrangement.spacedBy(10.dp)
+                ) {
+                    Button(
+                        modifier = Modifier.fillMaxWidth(),
+                        onClick = {
+                            nome.trim()
+                            if(nome != null && nome != ""){
+                                navController.navigate("questionario/${nome}")
+                            }
                         }
+                    ) {
+                        Text(
+                            text = "Prosseguir"
+                        )
                     }
-                ) {
-                    Text(
-                        text = "Prosseguir"
-                    )
-                }
-                Button(
-                    modifier = Modifier.fillMaxWidth(),
-                    onClick = {
-                        navController.popBackStack()
+                    Button(
+                        modifier = Modifier.fillMaxWidth(),
+                        onClick = {
+                            navController.popBackStack()
+                        }
+                    ) {
+                        Text(
+                            text = "Voltar"
+                        )
                     }
-                ) {
-                    Text(
-                        text = "Voltar"
-                    )
                 }
+
             }
 
         }
 
     }
+
 }

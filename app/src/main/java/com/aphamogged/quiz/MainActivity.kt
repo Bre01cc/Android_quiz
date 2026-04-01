@@ -1,8 +1,10 @@
 package com.aphamogged.quiz
 
+import Quiz.QuizViewModel
 import Screen.ApresentacaoScreen
 import Screen.NomeScreen
 import Screen.QuestionarioScreen
+import Screen.ResultadoScreen
 import android.R
 import android.R.attr.name
 import android.R.attr.onClick
@@ -52,6 +54,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -130,7 +133,23 @@ class MainActivity : ComponentActivity() {
                         ){
                             rota ->
                             val nome = rota.arguments?.getString("nome")
-                            QuestionarioScreen(navController, nome = nome!!)
+                            QuestionarioScreen(navController, nome = nome!!, viewModel = viewModel())
+                        }
+                        composable(
+                            route = "resultado/{nome}/{acerto}",
+                            arguments = listOf(
+                                navArgument("nome"){
+                                    type = NavType.StringType
+                                },
+                                navArgument("acerto"){
+                                    type = NavType.IntType
+                                }
+                            )
+                        ){
+                            rota ->
+                            val nome = rota.arguments?.getString("nome")
+                            val acerto = rota.arguments?.getInt("acerto")
+                            ResultadoScreen(navController,nome = nome!!, acerto = acerto!!)
                         }
                     }
                 }

@@ -22,8 +22,7 @@ import androidx.navigation.NavController
 import componente.LogoApp
 
 @Composable
-fun ResultadoScreen(navController: NavController) {
-    val acertos = 0
+fun ResultadoScreen(navController: NavController ,nome: String, acerto : Int) {
     Column(
         modifier = Modifier.fillMaxSize()
             .background(Color(82, 32, 93, 255)),
@@ -42,12 +41,12 @@ fun ResultadoScreen(navController: NavController) {
                 verticalArrangement = Arrangement.spacedBy(10.dp)
             ) {
                 Text(
-                    text = "Bom trabalho!",
+                    text = " ${nome}, bom trabalho!",
                     fontSize = 24.sp,
                     color = Color.White
                 )
                 Text(
-                    text = "Você acertou ${acertos} de 3 perguntas",
+                    text = "Você acertou ${acerto} de 3 perguntas",
                     fontSize = 16.sp,
                     color = Color.White
                 )
@@ -55,7 +54,7 @@ fun ResultadoScreen(navController: NavController) {
             Row() {
                 Button(
                     onClick = {
-
+                    navController.popBackStack("apresentacao",false)
                     }
                 ) {
                     Text(

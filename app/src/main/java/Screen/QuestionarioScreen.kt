@@ -1,7 +1,7 @@
 package Screen
 
-import Questoes.Pergunta
-import Questoes.ValidarQuestao
+import Quiz.Pergunta
+import Quiz.QuizViewModel
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -38,40 +38,22 @@ import componente.LogoApp
 
 
 @Composable
-fun QuestionarioScreen(navController: NavController,nome : String) {
-    var numeroQuestao by remember {
-        mutableStateOf(1)
-    }
+fun QuestionarioScreen(
+    navController: NavController,
+    nome : String,
+    viewModel: QuizViewModel
+) {
 
-    var statusDoButton by remember {
-        mutableStateOf(false)
-    }
-
-    val pergunta1 = Pergunta(texto = "Quando inciou a ditadura militar",
-        alternativas = listOf("01/04/1964", "01/07/1965", "20/08/1968", "08/10/1954"),
-        alternativaCorreta = 0)
-
-    val pergunta2 = Pergunta(texto = "Quem foi o primeiro presidente do Brasil?",
-        alternativas = listOf("Deodoro da Fonseca", "Getúlio Vargas", "Juscelino Kubitschek", "Dom Pedro II"),
-        alternativaCorreta = 0)
-
-    val pergunta3 = Pergunta(
-        texto = "Qual é o país com maior população do mundo?",
-        alternativas = listOf(
-            "Estados Unidos", "Índia", "China", "Brasil"
-        ),
-        alternativaCorreta = 1
-    )
-
-
-    val questoes = listOf(pergunta1, pergunta2,pergunta3)
-
-    Column(
-        modifier = Modifier.fillMaxSize()
+    val numeroQuestao = viewModel.numeroQuestao
+    val questoes = viewModel.questoes
+    val acerto = viewModel.acerto
+    var avancar: Boolean
+    Column(modifier = Modifier.fillMaxSize()
             .background(Color(82, 32, 93, 255)),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
     ) {
-        LogoApp(tamanho = 75)
+        LogoApp(tamanho = 80)
 
         Column(modifier = Modifier
             .padding(horizontal = 15.dp)
@@ -104,7 +86,7 @@ fun QuestionarioScreen(navController: NavController,nome : String) {
 
             CardApp(modifier = Modifier, alternativas = questoes[numeroQuestao -1].alternativas,
                 questao = questoes[numeroQuestao-1].texto,
-                alternativaCorreta  = questoes[numeroQuestao-1].alternativaCorreta)
+                alternativaCorreta  = questoes[numeroQuestao-1].alternativaCorreta, viewModel = viewModel)
 
             Column(
                 modifier = Modifier.fillMaxWidth()
@@ -112,12 +94,15 @@ fun QuestionarioScreen(navController: NavController,nome : String) {
             ) {
                 Button(
                     modifier = Modifier.fillMaxWidth(),
+                    enabled = viewModel.statusDoButton,
                     onClick = {
-                        if (numeroQuestao > 3){
-                            navController.navigate("")
-                        }else{
-                            numeroQuestao = numeroQuestao + 1
-                        }
+                     avancar  = viewModel.proximaQuestao()
+                        viewModel.desativaAvancar()
+                        viewModel.ativarQuestao()
+                       if (avancar == false){
+                           navController.navigate("resultado/${nome}/${acerto}")
+                       }
+
                     },
 
                 ) {

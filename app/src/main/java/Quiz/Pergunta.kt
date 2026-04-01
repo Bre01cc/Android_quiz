@@ -1,4 +1,4 @@
-package Questoes
+package Quiz
 
 data class Pergunta(
     val texto : String,
