@@ -14,7 +14,8 @@ Disciplina ministrada pelo professor [João Henrique](https://www.linkedin.com/i
 ## Descrição 
 A aplicação consiste em um quiz de três perguntas de conhecimentos gerais que, ao fim
 exibe a quantidade de acertos com base nas alternativas selecionadas pelo usuário.
-
+## Demonstração
+ - [Vídeo](https://youtube.com/shorts/WtdeQtK3by4?si=uHiFFJcfZyrMgvf9)
 ## Ferramentas
 - Kotlin
 - Android Studio
@@ -22,9 +23,6 @@ exibe a quantidade de acertos com base nas alternativas selecionadas pelo usuár
 ```
 https://github.com/Bre01cc/Android_quiz.git
 ```
-## Demonstração
- - [Vídeo](https://youtube.com/shorts/WtdeQtK3by4?si=uHiFFJcfZyrMgvf9)
-
 
 ## Autor
 - [Breno Reis](https://www.linkedin.com/in/breno-oliveira-assis-reis-203010351/)
